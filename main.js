@@ -1,5 +1,6 @@
 var count = 1;
 var nfm = new NFM();
+var computationPlumber;
 
 jsPlumb.bind("ready", function() {
     //chrome fix
@@ -11,6 +12,9 @@ jsPlumb.bind("ready", function() {
 
     /* initialize tool box */
     initToolBox();
+
+    /* initialize computation box */
+    initCompBox();
        
     /* event Listener for addState button */    
     initAddState();
@@ -61,7 +65,7 @@ jsPlumb.bind("ready", function() {
     initAddState = function() {
         $('#addState').bind('click', function() {
             var state_id = "state_"+count;
-            var state = $("<div class='w' id='"+state_id+"'>#"+count+"&nbsp<div class='ep'></div></div>");
+            var state = $("<div class='w_node' id='"+state_id+"'>#"+count+"&nbsp<div class='ep'></div></div>");
             
             /* each state consists of:
              * - start indicator
@@ -85,16 +89,38 @@ jsPlumb.bind("ready", function() {
     };
     
     initToolBox = function() {
-        $(".toolBox").draggable();
+        $("#toolBox").draggable();
         $("input:text, input:password, input[type=email]").button().addClass("ui-textfield");
         $("#evaluate").click(function(e) {
-            validate(e); 
             nfm.input = $("#input").val();
+            if (!validate(e)) { 
+                e.stopPropagation();
+                return false;
+            }
+            
             nfm.evaluate();
         });
 
         initTransitions();
         initAlphabets();
+    };
+
+    initCompBox = function() {
+        $(".computation").draggable();
+        computationPlumber = jsPlumb.getInstance({
+            Connector : [ "StateMachine", { curviness:20 } ],
+			DragOptions : { cursor: "pointer", zIndex:2000 },
+			PaintStyle : { strokeStyle:"gray", lineWidth:2 },
+			Endpoint : [ "Dot", {radius:2} ],
+			Anchor :  "Continuous",
+            ConnectionOverlays : [
+            [ "Arrow", { 
+                location:1,
+                id:"arrow",
+	            length:14,
+	            foldback:0.8
+            }]]
+        });
     };
 
     initTransitions = function() {

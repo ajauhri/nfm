@@ -52,18 +52,40 @@
         /* check start state exists */
         if (nfm.start === undefined) {
             alert("Start state not defined");
-            e.stopPropagation();
+            return false;
         }
 
         /* accept states empty */
-        if (nfm.accept.size === 0) {
+        var count = 0;
+        for(var i = 0; i++ < nfm.accept.size; nfm.accept.next()) {
+            if (!nfm.accept.value())
+                count++;
+        }
+        if (count === nfm.accept.size) {
             alert("Accept state(s) not defined");
-            e.stopPropagation();
+            return false;
         }
 
+        /* check existence of input string */
+        if (!nfm.input) {
+            alert("Input string is empty");
+            return false;
+        }
+
+        return true;
+    };
+    
+    getRandom = function () {
+        return (Math.floor(Math.random() * (9999999) + 1)).toString();
     };
 
+    getRangeDelta = function(width, nodes) {
+        return width/nodes;
+    };
 
+    getXPos = function(height, angle) {
+        return height/Math.tan(angle);
+    };
 
 })();
 

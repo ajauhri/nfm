@@ -51,12 +51,12 @@ HashMap.prototype.link = function(item) {
 
 HashMap.prototype.unlink = function(item) {
     if (this.size == 0)
-        this.current = undefiend;
+        this.current = undefined;
     else {
         item.prev.next = item.next;
         item.next.prev = item.prev;
         if (item === this.current)
-            this.current = this.next;
+            this.current = item.next;
     }
 };
 
@@ -67,7 +67,6 @@ HashMap.prototype.remove = function(key) {
     if(item !== undefined) {
         this.size--;
         this.unlink(item);
-
         delete this[hash];
     }
 };

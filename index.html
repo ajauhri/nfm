@@ -1,35 +1,43 @@
 <html>
 	<head>
         <title>NFM</title>
-		<link rel="stylesheet" href="style.css">
+        <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+        <link rel="stylesheet" href="style.css">
 	</head>
 	<body data-demo-id="NFM Demo">
-        <div id="main"></div>
-        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="http://jsplumb.org/js/jquery.ui.touch-punch.min.js"></script>
-        <script type="text/javascript" src="http://jsplumb.org/js/jquery.jsPlumb-1.3.16-all-min.js"></script>
-        <script type="text/javascript" src="helper.js"></script>
-        <script type="text/javascript" src="hash.js"></script>
-        <script type="text/javascript" src="nfm.js"></script>
-        <script type="text/javascript" src="main.js"></script>
-        <div class="toolBox">
-            <a href="#" id="addState">Add State</a><hr/>
-            <div class="subhead">Transistion: <select id="deltas"></select></div>
-            <div class="subhead">Symbols: <input id="alphabets" size=15/></div>
-            <hr/>
-            <div class="subhead">Input string: <input id="input" size=15/></div>
-            <button id="evaluate">Evaluate</button>
-            <hr/>
-            <div class="subhead">Glossary:
-                <ul>
-                    <li class="ui-state-default ui-corner-all"><span style="text-decoration:line-through">A</span>: Not accept state</li>
-                    <li class="ui-state-default ui-corner-all">A: Accept state</li>
-                    <li class="ui-state-default ui-corner-all"><span style="text-decoration:line-through">S</span>: Not start state</li>
-                    <li class="ui-state-default ui-corner-all">S: Start state</li>
-                    <li class="ui-state-default ui-corner-all">Use &#1013; as input symbol for <a href="http://en.wikipedia.org/wiki/Nondeterministic_finite_automaton_with_%CE%B5-moves">&#x190;-moves</a></li>
-                </ul>
-            </div>
+    <div id="main"></div>
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="http://jsplumb.org/js/jquery.ui.touch-punch.min.js"></script>
+    <script type="text/javascript" src="http://jsplumb.org/js/jquery.jsPlumb-1.3.16-all-min.js"></script>
+    <script type="text/javascript" src="helper.js"></script>
+    <script type="text/javascript" src="hash.js"></script>
+    <script type="text/javascript" src="nfm.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+    <div id="toolBox">
+        <a href="#" id="addState">Add State</a><hr/>
+        <div class="subHead">Transistion: <select id="deltas"></select></div>
+        <div class="subHead">Symbols: <input id="alphabets" size=15/></div>
+        <hr/>
+        <div class="subHead">Input string: <input id="input" size=15/></div>
+        <button id="evaluate">Evaluate</button>
+        <hr/>
+        <div class="subHead">Glossary:
+            <ul>
+                <li class="ui-state-default ui-corner-all"><span style="text-decoration:line-through">A</span>: Not accept state</li>
+                <li class="ui-state-default ui-corner-all">A: Accept state</li>
+                <li class="ui-state-default ui-corner-all"><span style="text-decoration:line-through">S</span>: Not start state</li>
+                <li class="ui-state-default ui-corner-all">S: Start state</li>
+                <li class="ui-state-default ui-corner-all">Use <a href="http://www.fileformat.info/info/unicode/char/190/index.htm">&#400;</a> as input symbol for <a href="http://en.wikipedia.org/wiki/Nondeterministic_finite_automaton_with_%CE%B5-moves">&#400;-moves</a></li>
+            </ul>
         </div>
+    </div>
+    <hr/>
+    <!-- Computation Section -->
+    <div id="comp">
+        <div class="subHead">Computation Result:</div>
+    </div>
+    <p class="foot-note">Demonstration uses <a href="http://www.jsplumb.org/">jsPlumb 1.3.16,</a><a href="http://jquery.com">jQuery 1.8.3,</a><a href="http://jqueryui.com/">jQuery UI 1.8.23</a>.</p>
 	</body>
 </html>
