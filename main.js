@@ -103,6 +103,7 @@ jsPlumb.bind("ready", function() {
 
         initTransitions();
         initAlphabets();
+        initEpsilonClick();
     };
 
     initCompBox = function() {
@@ -139,7 +140,8 @@ jsPlumb.bind("ready", function() {
     };
 
     initAlphabets = function() {
-        $("#alphabets, #input").attr("placeholder", "not specified");
+        $("#alphabets").attr("placeholder", "Transition symbols");
+        $("#input").attr("placeholder", "Input string");
         $("#alphabets").blur(function() {
             if ($("#deltas").find(":selected").text()) {
                 var delta = $("#deltas").find(":selected").text().split("to");
@@ -149,4 +151,11 @@ jsPlumb.bind("ready", function() {
             }
         });
     };   
+
+    initEpsilonClick = function() {
+        $("#e-symbol").click(function () {
+            $("#alphabets").val($("#alphabets").val() + "Ɛ");
+        });
+    };
+
  })();
