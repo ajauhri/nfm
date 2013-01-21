@@ -72,6 +72,21 @@
             return false;
         }
 
+        /* check all transitions have a symbol */
+        for (var i=0; i<nfm.transition.size; nfm.transition.next(), i++) {
+            var size = nfm.transition.value().size;
+            while (size) {
+                if (nfm.transition.value().value() === undefined) 
+                    break;
+                size--;
+                nfm.transition.value().next();
+            }
+            if (size !== 0) {
+                alert("Transition symbols not provided for all transitions.");
+                return false;
+            }
+        }
+
         return true;
     };
     

@@ -49,6 +49,8 @@ jsPlumb.bind("ready", function() {
             jsPlumb.bind("jsPlumbConnection", function(conn) {
                 conn.connection.setPaintStyle({strokeStyle:'rgb(54, 164, 207)'});
                 var key = conn.sourceId + " to " + conn.targetId;
+                if (nfm.transition.get(conn.sourceId) === undefined)
+                    nfm.transition.put(conn.sourceId, new HashMap());
                 nfm.transition.get(conn.sourceId).put(conn.targetId, undefined);
                 var delta_id = "#deltas option[value='"+key+"']";
                 if ($(delta_id).length == 0) { 

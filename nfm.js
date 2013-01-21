@@ -10,8 +10,7 @@ NFM = function() {
 
 NFM.prototype.addState = function(name) {
     this.states.push(name);
-    this.accept.put(name, false);
-    this.transition.put(name, new HashMap());
+    this.accept.put(name, false); //not sure whether this is meant to be here. 
 };
 
 
@@ -37,25 +36,29 @@ NFM.prototype.evaluate = function() {
     for (var i=0; i<this.input.length; i++)  {
         next = []; 
         for(var j=0; j<current.length; j++) {
-            var transitions = this.transition.get(current[j].value);
-            for(var k=0; k++ < transitions.size; transitions.next()) {
-                if (transitions.value().indexOf(this.input[i]) !== -1) {
-                    var pathNode = this.createPathNode(transitions.key(), current[j]);
+            var delta = this.transition.get(current[j].value);
+            var size = delta ? delta.size : 0;
+            while(size)  {             
+                if (delta.value().indexOf(this.input[i]) !== -1) {
+                    var pathNode = this.createPathNode(delta.key(), current[j]);
                     next.push(pathNode);
                     current[j].children.push(pathNode);
                 }
-                if (transitions.value().indexOf("\u0190") !== -1) {
-                    var pathNode = this.createPathNode(transitions.key(), current[j].parent);
+                /* self-loop has a epsilon, then this will go to infinite, so just omit it */
+                if (delta.value().indexOf("\u0190") !== -1 && !(delta.key() === current[j].value)) {
+                    var pathNode = this.createPathNode(delta.key(), current[j].parent);
                     current.push(pathNode);
                     if (current[j].parent !== undefined) //if the start state has epsilon-transistion
                         current[j].parent.children.push(pathNode);
                 }
+                size--;
+                delta.next();
             }
         }
         current = next;
     }
     this.drawComputation();
-    console.log(this.root);
+    //console.log(this.root);
 };
 
 NFM.prototype.drawComputation = function() {
