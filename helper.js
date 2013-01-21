@@ -50,7 +50,7 @@
 
     validate = function(e) {
         /* check start state exists */
-        if (nfm.start === undefined) {
+        if (!nfm.start) {
             alert("Start state not defined");
             return false;
         }
@@ -76,7 +76,7 @@
         for (var i=0; i<nfm.transition.size; nfm.transition.next(), i++) {
             var size = nfm.transition.value().size;
             while (size) {
-                if (nfm.transition.value().value() === undefined) 
+                if (!nfm.transition.value().value()) 
                     break;
                 size--;
                 nfm.transition.value().next();

@@ -49,7 +49,7 @@ jsPlumb.bind("ready", function() {
             jsPlumb.bind("jsPlumbConnection", function(conn) {
                 conn.connection.setPaintStyle({strokeStyle:'rgb(54, 164, 207)'});
                 var key = conn.sourceId + " to " + conn.targetId;
-                if (nfm.transition.get(conn.sourceId) === undefined)
+                if (!nfm.transition.get(conn.sourceId))
                     nfm.transition.put(conn.sourceId, new HashMap());
                 nfm.transition.get(conn.sourceId).put(conn.targetId, undefined);
                 var delta_id = "#deltas option[value='"+key+"']";
@@ -132,12 +132,7 @@ jsPlumb.bind("ready", function() {
             var source = trim(delta[0]);
             var target =  trim(delta[1]);
             var alphabets = nfm.transition.get(source).get(target);
-            if (alphabets === undefined) {
-                $("#alphabets").val("");
-             }
-            else {
-                $("#alphabets").val(alphabets);
-            }
+            $("#alphabets").val(alphabets);
         });
     };
 
@@ -149,7 +144,7 @@ jsPlumb.bind("ready", function() {
                 var delta = $("#deltas").find(":selected").text().split("to");
                 var source = trim(delta[0]);
                 var target = trim(delta[1]);
-                nfm.transition.get(source).put(target, this.value);
+                nfm.transition.get(source).put(target, this.value); 
             }
         });
     };   
