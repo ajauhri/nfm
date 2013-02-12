@@ -13,6 +13,9 @@ jsPlumb.bind("ready", function() {
     /* initialize tool box */
     initToolBox();
 
+    /* initialize how to box */
+    initHowToBox();
+    
     /* initialize computation box */
     initCompBox();
        
@@ -106,6 +109,21 @@ jsPlumb.bind("ready", function() {
         initTransitions();
         initAlphabets();
         initEpsilonClick();
+    };
+
+    initHowToBox = function() {
+        $("#howTo").draggable();
+        $("#howTo").html("How to use this demo? " +
+                "<ul><li>Add multiple states using the `Add State` link. </li>" +
+                "<li>Transition arrows between states can be made by holding the mouse pointer on <img src='square_block.png'/> symbol of the source state " +
+                "and dragging it to the desitination state. Self-loops can also be made by dragging the arrow to the source state itself.</li> " + 
+                "<li>Every transistion will have a entry in the `Transition` drop down list. By selecting the transition from the drop down list," +
+                " the transition symbol(s) can be entered in the `Transistion symbols` box.</li>"+
+                "<li>Every transistion should have at least one symbol. Multiple symbols should be separatd by commas. " +
+                "Example: a,c,e,&#400;,f. For convenience, the &#400; symbol can be entered by pressing the &#400; link provided in the Glossary.</li> " +
+                "<li>The automaton should have one start state and at least one accept state.</li> " +
+                "<li>The input string to be computed by the automaton can be provided in the `Input String` box.</li>" +
+                "<li>Press the `Compute` button to see the result in the bottom section of the page.</li></ul>");
     };
 
     initCompBox = function() {

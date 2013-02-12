@@ -62,7 +62,7 @@
 
 path { cursor:pointer; }
 
-#toolBox {
+#toolBox, #howTo {
     left: 1em;
     top: 1em;
     width: 17em;
@@ -79,6 +79,15 @@ path { cursor:pointer; }
     box-shadow: 2px 2px 19px #aaa;
     cursor: move;
 }
+
+#howTo {
+    left: 60em;
+    top: 1em;
+    width: 25em;
+}
+
+#howTo ul li { margin: 10 20px 10px 5px; }
+
 
 a {
     text-decoration: none;
